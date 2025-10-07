@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 // FIX: Reverted from namespace import to named imports for react-router-dom to resolve module errors.
 import { Link } from 'react-router-dom';
@@ -141,7 +138,7 @@ const DashboardPage: React.FC = () => {
   return (
     <div className="space-y-8">
       <div>
-        {pageLoading ? <Skeleton className="h-10 w-3/4 rounded-xl" /> : <h1 className="text-3xl font-bold text-primary">Selamat Datang, {student?.nama}!</h1>}
+        {pageLoading ? <Skeleton className="h-10 w-3/4 rounded-xl" /> : <h1 className="text-3xl font-bold text-primary truncate">Selamat Datang, {student?.nama}!</h1>}
         {pageLoading ? <Skeleton className="h-5 w-1/2 mt-2 rounded-lg" /> : <p className="text-text-light mt-1">Siap untuk membuat kelas berkilau hari ini?</p>}
       </div>
       
@@ -177,7 +174,7 @@ const DashboardPage: React.FC = () => {
               {todayPiket.map((name, index) => (
                 <li key={index} className={`flex items-center space-x-3 p-3 rounded-2xl ${name === student?.namaLengkap ? 'bg-accent/20' : 'bg-background'}`}>
                   <img src={`https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=C19A6B&color=fff&size=128`} alt={name} className="h-10 w-10 rounded-full object-cover" />
-                  <span className="font-semibold">{name}</span>
+                  <span className="font-semibold truncate">{name}</span>
                   {name === student?.namaLengkap && <span className="ml-auto text-xs font-bold text-accent bg-accent/10 px-2 py-1 rounded-full">ANDA</span>}
                 </li>
               ))}

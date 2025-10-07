@@ -118,10 +118,9 @@ const CreateReportPage: React.FC = () => {
     }, [selectedStudentIds, allStudents]);
 
     const avgRating = useMemo(() => {
-        // FIX: Explicitly type `r` as `{ rating: number }` to resolve TypeScript inference issue where it was treated as `unknown`.
-        const ratedAreas = Object.values(ratings).filter(r => r.rating > 0);
+        // FIX: Explicitly type `r` as `{ rating: number }` to resolve TypeScript inference issue where it was treated as `unknown`, which fixes errors in both `filter` and the subsequent `reduce` call.
+        const ratedAreas = Object.values(ratings).filter((r: { rating: number; }) => r.rating > 0);
         if (ratedAreas.length === 0) return 0;
-        // FIX: With `ratedAreas` correctly typed, `r` is now correctly inferred in `reduce`, resolving the arithmetic operation error.
         return ratedAreas.reduce((sum, r) => sum + r.rating, 0) / ratedAreas.length;
     }, [ratings]);
 
@@ -144,8 +143,10 @@ const CreateReportPage: React.FC = () => {
             return;
         }
         for (const file of files) {
-            const url = URL.createObjectURL(file); // For preview
-            setPhotos(prev => [...prev, { id: `${file.name}-${Date.now()}`, url }]);
+            // FIX: Cast `file` to `any` to resolve `unknown` type error for URL.createObjectURL.
+            const url = URL.createObjectURL(file as any); // For preview
+            // FIX: Cast `file` to `any` to access `name` property.
+            setPhotos(prev => [...prev, { id: `${(file as any).name}-${Date.now()}`, url }]);
         }
     }, [photos.length, addNotification]);
 
@@ -158,10 +159,10 @@ const CreateReportPage: React.FC = () => {
         const reportsToCreate = selectedStudents.map(student => ({
             tanggal,
             nama: student.namaLengkap,
-            // FIX: Use a double assertion (`as unknown as LaporanRating`) to correctly cast the dynamically created object to the specific LaporanRating type, resolving a type mismatch error.
-            rating: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, v.rating])) as unknown as LaporanRating,
-            // FIX: Explicitly type `v` to resolve `unknown` type error when accessing `v.catatan`.
-            ratingNotes: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, v.catatan])),
+            // FIX: Cast `v` to `any` to resolve `unknown` type error when accessing `v.rating`.
+            rating: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, (v as any).rating])) as unknown as LaporanRating,
+            // FIX: Cast `v` to `any` to resolve `unknown` type error when accessing `v.catatan`.
+            ratingNotes: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, (v as any).catatan])),
             tasks,
             catatan: evaluationNotes,
             fotoBukti: photos.map(p => p.url),

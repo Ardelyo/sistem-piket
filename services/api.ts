@@ -178,7 +178,8 @@ const fetchAbsensiFromSheets = async (): Promise<Absensi[]> => {
     return new Promise((resolve) => {
         const callbackName = `jsonp_callback_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
         let script: HTMLScriptElement | null = null;
-        let timeoutId: NodeJS.Timeout | null = null;
+        // FIX: Replaced NodeJS.Timeout with ReturnType<typeof setTimeout> to resolve a type error in browser environments where NodeJS types are not available. This ensures the timeout ID is correctly typed for both browser and Node environments.
+        let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
         const cleanup = () => {
             if (timeoutId) clearTimeout(timeoutId);
@@ -884,7 +885,8 @@ export const testConnection = async () => {
 // AUTO-SYNC MANAGER (Optional)
 // =====================================
 
-let syncInterval: NodeJS.Timeout | null = null;
+// FIX: Replaced NodeJS.Timeout with ReturnType<typeof setInterval> to resolve a type error in browser environments where NodeJS types are not available. This ensures the interval ID is correctly typed for both browser and Node environments.
+let syncInterval: ReturnType<typeof setInterval> | null = null;
 
 export const startAutoSync = (interval = SYNC_INTERVAL) => {
     if (!ENABLE_AUTO_SYNC) {

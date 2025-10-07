@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
 
     if (loading) {
         return <div className="space-y-6">
-            <Card className="!p-0 overflow-hidden"><Skeleton className="h-40" /><div className="p-6"><Skeleton className="h-8 w-48" /><Skeleton className="h-6 w-32 mt-2" /></div></Card>
+            <Card className="!p-0"><Skeleton className="h-40" /><div className="p-6"><Skeleton className="h-8 w-48" /><Skeleton className="h-6 w-32 mt-2" /></div></Card>
             <Skeleton className="h-24 w-full rounded-3xl" />
             <Skeleton className="h-64 w-full rounded-3xl" />
         </div>;
@@ -44,12 +44,12 @@ const ProfilePage: React.FC = () => {
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">
-            <Card className="!p-0 overflow-hidden">
+            <Card className="!p-0">
                 <div className="bg-accent/20 h-28" />
                 <div className="p-6 flex flex-col sm:flex-row items-center sm:space-x-6 -mt-20">
                     <img src={student.foto} alt={student.namaLengkap} className="h-32 w-32 rounded-full border-4 border-background bg-card object-cover shadow-lg" />
                     <div className="text-center sm:text-left mt-4 sm:mt-12">
-                        <h1 className="text-3xl font-bold text-primary">{student.namaLengkap}</h1>
+                        <h1 className="text-3xl font-bold text-primary break-words">{student.namaLengkap}</h1>
                         <p className="text-text-light">Level {student.level} - Peringkat #{student.rank}</p>
                     </div>
                     <div className="mt-4 sm:ml-auto sm:mt-12 text-center bg-background px-6 py-3 rounded-2xl">

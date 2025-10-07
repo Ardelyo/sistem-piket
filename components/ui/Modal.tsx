@@ -32,11 +32,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
 
   return (
     <div 
-        className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4"
+        className="fixed inset-0 bg-black bg-opacity-60 z-30 flex justify-center items-center p-4"
         onClick={onClose}
     >
       <div 
-        className={`bg-background rounded-3xl shadow-lifted w-full ${sizeClasses[size]} transform transition-all duration-300 ease-out animate-modal-in`}
+        className={`bg-background rounded-3xl shadow-lifted w-full ${sizeClasses[size]} transform transition-all duration-300 ease-out animate-modal-in overflow-hidden`}
         onClick={e => e.stopPropagation()}
       >
         <div className="flex justify-between items-center p-4 border-b border-card">

@@ -56,7 +56,7 @@ const LeaderboardPage: React.FC = () => {
       <div className="flex flex-col items-center">
         <img src={student.foto} alt={student.namaLengkap} className="h-20 w-20 rounded-full border-4 border-background shadow-lg mb-2 z-10" />
         <div className={`w-full ${style.height} ${style.color} rounded-t-2xl flex flex-col justify-end items-center p-2 pt-8 -mt-10`}>
-          <p className="font-bold text-lg text-white text-center">{student.nama}</p>
+          <p className="font-bold text-lg text-white text-center truncate w-full px-1">{student.nama}</p>
           <p className={`font-semibold ${style.textColor}`}>{student.xp} XP</p>
         </div>
       </div>
@@ -94,9 +94,9 @@ const LeaderboardPage: React.FC = () => {
                 <Card key={student.id} className="flex items-center space-x-4 p-4">
                     <span className="text-xl font-bold text-text-light w-8 text-center">{student.rank}</span>
                     <img src={student.foto} alt={student.namaLengkap} className="h-14 w-14 rounded-full object-cover"/>
-                    <div className="flex-grow">
+                    <div className="flex-grow min-w-0">
                         <div className="flex items-center space-x-2">
-                            <p className="font-bold text-lg text-primary">{student.namaLengkap}</p>
+                            <p className="font-bold text-lg text-primary truncate">{student.namaLengkap}</p>
                             <RankBadge rank={student.rank} />
                         </div>
                         <p className="text-sm text-text-light">Level {student.level}</p>

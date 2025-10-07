@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 // FIX: Reverted from namespace import to named imports for react-router-dom to resolve module errors.
 import { NavLink } from 'react-router-dom';
@@ -30,7 +28,7 @@ const BottomNav: React.FC = () => {
     }
 
     return (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 h-20 bg-background/85 backdrop-blur-xl z-30 rounded-t-3xl shadow-top">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 h-20 bg-background/85 backdrop-blur-xl z-20 rounded-t-3xl shadow-top pb-safe">
            <div className="grid grid-cols-5 h-full">
              {links.map(({ to, icon: Icon, label }) => (
                 <NavLink key={to} to={to} className={navLinkClass}>

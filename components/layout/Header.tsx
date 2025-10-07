@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, Fragment } from 'react';
 // FIX: Reverted from namespace import to named imports for react-router-dom to resolve module errors.
 import { useNavigate, NavLink } from 'react-router-dom';
@@ -45,7 +41,6 @@ const NotificationBell: React.FC = () => {
 const Header: React.FC<{ user: User | null }> = ({ user }) => {
     const { logout } = useAuth();
     const navigate = useNavigate();
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     const handleLogout = () => {
@@ -71,13 +66,13 @@ const Header: React.FC<{ user: User | null }> = ({ user }) => {
         <div className="relative">
             <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center space-x-2">
                 <img src={user?.foto} alt={user?.namaLengkap} className="h-10 w-10 rounded-full border-2 border-card" />
-                <div className="hidden md:block text-left">
-                    <p className="font-semibold text-sm text-primary">{user?.namaLengkap}</p>
+                <div className="hidden sm:block text-left">
+                    <p className="font-semibold text-sm text-primary truncate max-w-24">{user?.namaLengkap}</p>
                     <p className="text-xs text-text-light">{user?.role}</p>
                 </div>
             </button>
             {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-background rounded-2xl shadow-lifted z-50 p-2">
+                <div className="absolute right-0 mt-2 w-48 bg-background rounded-2xl shadow-lifted z-10 p-2">
                     <NavLink to={user?.role === 'Siswa' ? "/profile" : "/admin/profile"} className="flex items-center w-full text-left px-4 py-2 text-sm text-text-light hover:bg-card/70 rounded-lg"><UserCircleIcon className="h-5 w-5 mr-2" />Profil</NavLink>
                     {user?.role !== 'Siswa' && <NavLink to="/admin" className="flex items-center w-full text-left px-4 py-2 text-sm text-text-light hover:bg-card/70 rounded-lg"><Cog6ToothIcon className="h-5 w-5 mr-2" />Admin Panel</NavLink>}
                     <button onClick={handleLogout} className="flex items-center w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-100 rounded-lg"><ArrowRightOnRectangleIcon className="h-5 w-5 mr-2" />Keluar</button>
@@ -87,7 +82,7 @@ const Header: React.FC<{ user: User | null }> = ({ user }) => {
     );
 
     return (
-        <header className="bg-background/85 backdrop-blur-xl sticky top-0 z-40 w-full shadow-lg rounded-b-3xl">
+        <header className="bg-background/85 backdrop-blur-xl sticky top-0 z-20 w-full shadow-lg rounded-b-3xl pt-safe">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
                     <div className="flex items-center space-x-2">
@@ -109,37 +104,12 @@ const Header: React.FC<{ user: User | null }> = ({ user }) => {
                         ))}
                     </nav>
 
-                    <div className="hidden md:flex items-center space-x-2">
+                    <div className="flex items-center space-x-2">
                          {user?.role === 'Siswa' && <NotificationBell />}
                         {profileMenu}
                     </div>
-
-                    {/* Mobile Nav Toggle */}
-                    <div className="md:hidden">
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 rounded-xl hover:bg-card/70">
-                            {isMenuOpen ? <XMarkIcon className="h-7 w-7" /> : <Bars3Icon className="h-7 w-7" />}
-                        </button>
-                    </div>
                 </div>
             </div>
-
-            {/* Mobile Menu Drawer */}
-            {isMenuOpen && (
-                 <div className="md:hidden absolute top-20 left-0 w-full bg-background/95 backdrop-blur-xl p-4 rounded-b-3xl shadow-lg">
-                    <nav className="flex flex-col space-y-2">
-                         {navLinks.map(link => (
-                            <NavLink key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className={({isActive}) => `px-4 py-3 rounded-xl text-lg ${isActive ? 'bg-primary text-white' : 'hover:bg-card/70'}`}>
-                                {link.label}
-                            </NavLink>
-                        ))}
-                        <div className="border-t border-card my-2"></div>
-                         <div className="p-2 flex items-center justify-between">
-                            {profileMenu}
-                            {user?.role === 'Siswa' && <NotificationBell />}
-                        </div>
-                    </nav>
-                </div>
-            )}
         </header>
     );
 };
