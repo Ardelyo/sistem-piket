@@ -1,0 +1,7 @@
+{
+  "name": "Piket Digitalisasi X-E8",
+  "description": "A comprehensive web application to manage and gamify classroom cleaning duties (piket) for class X-E8, using QR code attendance, photo reports, and a points-based leaderboard system.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
