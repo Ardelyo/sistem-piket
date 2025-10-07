@@ -114,7 +114,7 @@ const AdminPage: React.FC = () => {
                                     <tbody>
                                     {absensiToday.map(log => (
                                         <tr key={log.id} className="border-b border-card hover:bg-card/50">
-                                            <td className="p-3 font-semibold truncate max-w-xs">{log.nama}</td>
+                                            <td title={log.nama} className="p-3 font-semibold truncate max-w-xs">{log.nama}</td>
                                             <td className="p-3">{log.jamMasuk}</td>
                                             <td className="p-3">{log.jamKeluar || '-'}</td>
                                             <td className="p-3">{log.durasi || '-'}</td>
@@ -139,7 +139,7 @@ const AdminPage: React.FC = () => {
                                 {absensiLog.map(log => (
                                     <tr key={log.id} className="border-b border-card hover:bg-card/50">
                                         <td className="p-3">{log.tanggal}</td>
-                                        <td className="p-3 font-semibold truncate max-w-xs">{log.nama}</td>
+                                        <td title={log.nama} className="p-3 font-semibold truncate max-w-xs">{log.nama}</td>
                                         <td className="p-3">{log.jamMasuk}</td>
                                         <td className="p-3">{log.jamKeluar || '-'}</td>
                                         <td className="p-3">{log.durasi || '-'}</td>

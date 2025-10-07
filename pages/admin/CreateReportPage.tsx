@@ -118,8 +118,9 @@ const CreateReportPage: React.FC = () => {
     }, [selectedStudentIds, allStudents]);
 
     const avgRating = useMemo(() => {
-        // FIX: Explicitly type `r` as `{ rating: number }` to resolve TypeScript inference issue where it was treated as `unknown`, which fixes errors in both `filter` and the subsequent `reduce` call.
-        const ratedAreas = Object.values(ratings).filter((r: { rating: number; }) => r.rating > 0);
+        // FIX: Type inference for `Object.values` was failing, causing `r` to be of type `unknown`.
+        // Casting the result of `Object.values` to the correct type resolves this.
+        const ratedAreas = (Object.values(ratings) as { rating: number }[]).filter(r => r.rating > 0);
         if (ratedAreas.length === 0) return 0;
         return ratedAreas.reduce((sum, r) => sum + r.rating, 0) / ratedAreas.length;
     }, [ratings]);
@@ -143,10 +144,10 @@ const CreateReportPage: React.FC = () => {
             return;
         }
         for (const file of files) {
-            // FIX: Cast `file` to `any` to resolve `unknown` type error for URL.createObjectURL.
-            const url = URL.createObjectURL(file as any); // For preview
-            // FIX: Cast `file` to `any` to access `name` property.
-            setPhotos(prev => [...prev, { id: `${(file as any).name}-${Date.now()}`, url }]);
+            // FIX: Type inference for `file` was failing. Explicitly casting to `File` resolves this.
+            const typedFile = file as File;
+            const url = URL.createObjectURL(typedFile); // For preview
+            setPhotos(prev => [...prev, { id: `${typedFile.name}-${Date.now()}`, url }]);
         }
     }, [photos.length, addNotification]);
 
@@ -159,10 +160,9 @@ const CreateReportPage: React.FC = () => {
         const reportsToCreate = selectedStudents.map(student => ({
             tanggal,
             nama: student.namaLengkap,
-            // FIX: Cast `v` to `any` to resolve `unknown` type error when accessing `v.rating`.
-            rating: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, (v as any).rating])) as unknown as LaporanRating,
-            // FIX: Cast `v` to `any` to resolve `unknown` type error when accessing `v.catatan`.
-            ratingNotes: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, (v as any).catatan])),
+            // FIX: Type inference for `Object.entries` was failing, causing `v` to be of type `unknown`. Casting `v` resolves this.
+            rating: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, (v as { rating: number }).rating])) as LaporanRating,
+            ratingNotes: Object.fromEntries(Object.entries(ratings).map(([k, v]) => [k, (v as { catatan: string }).catatan])),
             tasks,
             catatan: evaluationNotes,
             fotoBukti: photos.map(p => p.url),
@@ -222,7 +222,7 @@ const CreateReportPage: React.FC = () => {
                             }} className="mt-1 h-5 w-5 rounded text-accent focus:ring-accent" />
                             <div className="flex-1">
                                 <img src={s.foto} alt={s.namaLengkap} className="w-12 h-12 rounded-full mx-auto mb-2"/>
-                                <p className="font-bold text-sm text-center">{s.namaLengkap}</p>
+                                <p title={s.namaLengkap} className="font-bold text-sm text-center truncate">{s.namaLengkap}</p>
                                 <p className="text-xs text-text-light text-center">{s.hariPiket}</p>
                                 <div className={`mt-2 text-xs text-center font-semibold px-2 py-1 rounded-full ${isCheckedOut ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600'}`}>
                                     {isCheckedOut ? 'Sudah Absen Keluar' : 'Belum Absen'}

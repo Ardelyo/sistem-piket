@@ -358,7 +358,7 @@ const AdminReportList: React.FC = () => {
                                 <tr className="border-b border-card hover:bg-card/50 transition-colors" onClick={() => setExpandedRowId(p => p === l.id ? null : l.id)}>
                                     <td className="p-3" onClick={e => e.stopPropagation()}><input type="checkbox" checked={selectedRows.has(l.id)} onChange={() => handleSelectRow(l.id)} className="rounded" /></td>
                                     <td className="p-3 whitespace-nowrap">{l.tanggal}</td>
-                                    <td className="p-3 font-semibold text-primary truncate max-w-xs">{l.nama}</td>
+                                    <td title={l.nama} className="p-3 font-semibold text-primary truncate max-w-xs">{l.nama}</td>
                                     <td className="p-3 font-semibold text-yellow-600">⭐ {l.avgRating.toFixed(1)}</td>
                                     <td className="p-3">
                                         <div className="w-20 bg-gray-200 rounded-full h-2.5">

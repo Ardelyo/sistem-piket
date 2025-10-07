@@ -67,7 +67,7 @@ const Header: React.FC<{ user: User | null }> = ({ user }) => {
             <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center space-x-2">
                 <img src={user?.foto} alt={user?.namaLengkap} className="h-10 w-10 rounded-full border-2 border-card" />
                 <div className="hidden sm:block text-left">
-                    <p className="font-semibold text-sm text-primary truncate max-w-24">{user?.namaLengkap}</p>
+                    <p title={user?.namaLengkap} className="font-semibold text-sm text-primary truncate max-w-24">{user?.namaLengkap}</p>
                     <p className="text-xs text-text-light">{user?.role}</p>
                 </div>
             </button>
