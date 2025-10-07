@@ -4,6 +4,7 @@
 
 
 
+import './src/index.css';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 // FIX: Reverted from namespace import to named imports for react-router-dom to resolve module errors.
 import { HashRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';

@@ -1,7 +1,8 @@
 # 🧹 Sistem Piket Digital X-E8
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Next.js-14.0-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/React-19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
   <img src="https://img.shields.io/badge/Google_Sheets-API-34A853?style=for-the-badge&logo=google-sheets&logoColor=white" alt="Google Sheets" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
@@ -100,13 +101,13 @@ Saya memilih teknologi ini karena kombinasi antara **modern**, **powerful**, dan
 
 | Layer | Technology | Alasan |
 |-------|------------|---------|
-| **Frontend** | Next.js 14 + TypeScript | Server components, type safety |
+| **Frontend** | Vite + React 19 + TypeScript | Fast development, modern tooling, type safety |
 | **Styling** | Tailwind CSS | Rapid development, consistent design |
 | **Backend** | Google Apps Script | Free serverless functions |
 | **Database** | Google Sheets | Free, 15GB storage, familiar |
 | **Storage** | Google Drive | Free image hosting |
-| **Hosting** | Vercel | Free dengan custom domain |
-| **State** | Zustand + localStorage | Simple, no boilerplate |
+| **Hosting** | Vercel / Netlify / etc. | Free static hosting |
+| **State** | React Context + localStorage | Simple, built-in state management |
 
 ---
 
@@ -182,23 +183,16 @@ Buka [http://localhost:3000](http://localhost:3000) ✨
 
 ```
 piket-digital-xe8/
-├── src/
-│   ├── app/              # Next.js app router pages
-│   │   ├── (auth)/      # Login page
-│   │   ├── admin/       # Admin dashboard & features
-│   │   └── siswa/       # Student dashboard & features
-│   ├── components/       # Reusable UI components
-│   │   ├── ui/          # Base components (Button, Card, etc)
-│   │   └── features/    # Feature-specific components
-│   ├── lib/             # Core business logic
-│   │   ├── sheets.ts    # Google Sheets API integration
-│   │   └── utils.ts     # Helper functions
-│   ├── constants/       # Static data & config
-│   │   └── database.ts  # Initial data structure
-│   └── types/           # TypeScript type definitions
-├── public/              # Static assets
-├── scripts/             # Google Apps Script files
-└── docs/               # Additional documentation
+├── components/         # Reusable UI components (e.g., Cards, Buttons)
+├── contexts/           # React Context for global state management
+├── pages/              # Top-level page components for routing
+├── services/           # API layer for communicating with the backend
+├── src/                # Source directory (contains global CSS)
+├── App.tsx             # Main application component with routing setup
+├── index.html          # The single HTML entry point for the app
+├── index.tsx           # The main entry point for the React application
+├── vite.config.ts      # Vite build configuration
+└── tailwind.config.js  # Tailwind CSS configuration
 ```
 
 ### API Endpoints
