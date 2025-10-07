@@ -21,7 +21,7 @@
 
 ## 📖 Tentang Project
 
-Halo! Saya **Ardellio Satria Anindito**, siswa kelas X-E8 dan Admin sistem piket kelas. Project ini saya buat bersama **Novita Ayu** (Sekretaris Kebersihan) untuk menyelesaikan masalah klasik di kelas kami: **sistem piket yang berantakan**.
+Halo! Saya **Ardellio Satria Anindito**, siswa kelas X-E8 dan Admin sistem piket kelas. Project ini saya buat bersama **Raindy dan Reihan** (Penasihat) untuk menyelesaikan masalah klasik di kelas kami: **sistem piket yang berantakan**.
 
 ### 🎯 Masalah yang Kami Hadapi
 
